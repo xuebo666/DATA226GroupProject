@@ -6,4 +6,5 @@ notebooks/data/
 kaggle.json
 mlruns/
 .venv/
+.DS_Store
 __pycache__/
