@@ -1,0 +1,17 @@
+name: amazon_reviews
+version: "1.0.0"
+config-version: 2
+profile: amazon_reviews
+
+model-paths: ["models"]
+
+vars:
+  n_per_category: 50000        # reviews per category in mart_model_data
+  temporal_split_year: 2012    # train on years <= this, test on later years
+
+models:
+  amazon_reviews:
+    staging:
+      +materialized: view
+    marts:
+      +materialized: table

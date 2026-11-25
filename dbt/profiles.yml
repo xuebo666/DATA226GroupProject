@@ -1,0 +1,15 @@
+# Snowflake connection using key-pair login. No secrets are stored here:
+# values come from environment variables (set in the load notebook).
+amazon_reviews:
+  target: dev
+  outputs:
+    dev:
+      type: snowflake
+      account: "{{ env_var('SNOWFLAKE_ACCOUNT') }}"
+      user: "{{ env_var('SNOWFLAKE_USER') }}"
+      private_key_path: "{{ env_var('SNOWFLAKE_PRIVATE_KEY_PATH') }}"
+      role: ACCOUNTADMIN
+      database: AMAZON_REVIEWS
+      warehouse: REVIEWS_WH
+      schema: ANALYTICS
+      threads: 4

@@ -1,0 +1,37 @@
+version: 2
+
+models:
+  - name: mart_rating_stats
+    description: Rating statistics per category and year.
+    columns:
+      - name: category
+        tests: [not_null]
+      - name: review_year
+        tests: [not_null]
+      - name: reviews
+        description: Number of reviews in the group.
+        tests: [not_null]
+
+  - name: mart_model_data
+    description: >
+      Balanced sample per category with labels and train/test flags for the in-category
+      and temporal experiments. Cross-category splits are made by filtering on category.
+    columns:
+      - name: review_id
+        tests:
+          - not_null
+          - unique
+      - name: label_3class
+        description: 0 = negative (1-2 stars), 1 = neutral (3), 2 = positive (4-5).
+        tests:
+          - accepted_values:
+              values: [0, 1, 2]
+              quote: false
+      - name: split_in_category
+        tests:
+          - accepted_values:
+              values: ['train', 'test']
+      - name: split_temporal
+        tests:
+          - accepted_values:
+              values: ['train', 'test']
