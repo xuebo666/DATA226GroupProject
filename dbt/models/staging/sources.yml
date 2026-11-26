@@ -1,9 +1,0 @@
-version: 2
-
-sources:
-  - name: raw
-    description: Raw cleaned reviews loaded from the Stage 2 Parquet files.
-    schema: RAW
-    tables:
-      - name: reviews
-        description: One row per cleaned Amazon review (Books, Music, Video_DVD, Digital_Ebook).
