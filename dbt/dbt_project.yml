@@ -1,0 +1,24 @@
+name: amazon_reviews
+version: "1.0.0"
+config-version: 2
+profile: amazon_reviews
+
+model-paths: ["models"]
+test-paths: ["tests"]
+macro-paths: ["macros"]
+
+# Settings the whole team can tweak in one place
+vars:
+  train_pct: 80              # in-category split: % of reviews used for training
+  temporal_min_year: 2000    # reviews before this year are excluded (too few)
+  temporal_train_end_year: 2012   # train: min_year..this year, test: later years
+  ml_sample_pct: 5           # % of all reviews kept in ml_dataset (5% is about 900k rows)
+
+models:
+  amazon_reviews:
+    staging:
+      +materialized: view
+      +schema: staging
+    marts:
+      +materialized: table
+      +schema: marts

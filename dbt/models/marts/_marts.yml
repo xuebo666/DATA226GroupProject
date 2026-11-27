@@ -1,0 +1,54 @@
+version: 2
+
+models:
+  - name: fct_reviews
+    description: All reviews with derived columns (rating_class, char_count, helpful_ratio).
+    columns:
+      - name: review_id
+        data_tests: [unique, not_null]
+      - name: rating_class
+        description: negative (1-2 stars), neutral (3), positive (4-5). Used for the 3-class task.
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['negative', 'neutral', 'positive']
+
+  - name: split_in_category
+    description: "Experiment 1. Random train/test split (train_pct %) inside each category."
+    columns:
+      - name: review_id
+        data_tests: [unique, not_null]
+      - name: split
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['train', 'test']
+
+  - name: split_temporal
+    description: "Experiment 3. Train on years up to temporal_train_end_year, test on later years."
+    columns:
+      - name: review_id
+        data_tests: [unique, not_null]
+      - name: split
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['train', 'test', 'excluded']
+
+  - name: cross_category_pairs
+    description: "Experiment 2. The 12 (train_category, test_category) pairs."
+    columns:
+      - name: train_category
+        data_tests: [not_null]
+      - name: test_category
+        data_tests: [not_null]
+
+  - name: ml_dataset
+    description: Random sample of reviews with text, labels, and both split columns. Read by the modeling notebooks.
+    columns:
+      - name: review_id
+        data_tests: [unique, not_null]
+      - name: in_category_split
+        data_tests: [not_null]
+      - name: temporal_split
+        data_tests: [not_null]

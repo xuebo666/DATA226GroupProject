@@ -1,0 +1,16 @@
+version: 2
+
+sources:
+  - name: raw
+    description: Raw cleaned reviews loaded from Spark Parquet files (Stage 3, Part B).
+    schema: RAW
+    tables:
+      - name: reviews
+        description: One row per review, all four categories combined (about 18M rows).
+        columns:
+          - name: review_id
+            data_tests: [not_null]
+          - name: star_rating
+            data_tests: [not_null]
+          - name: category
+            data_tests: [not_null]

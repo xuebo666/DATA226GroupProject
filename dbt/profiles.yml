@@ -1,0 +1,28 @@
+# No passwords in this file. Credentials come from environment variables.
+amazon_reviews:
+  target: dev
+  outputs:
+
+    # dev: your personal sandbox. Everything is built in your own schema (DBT_<USERNAME>).
+    dev:
+      type: snowflake
+      account: "{{ env_var('SNOWFLAKE_ACCOUNT') }}"
+      user: "{{ env_var('SNOWFLAKE_USER') }}"
+      password: "{{ env_var('SNOWFLAKE_PASSWORD') }}"
+      role: PROJECT_ROLE
+      warehouse: COMPUTE_WH
+      database: DATA226GROUPPROJECT
+      schema: "DBT_{{ env_var('SNOWFLAKE_USER') | upper | replace('@', '_') | replace('.', '_') | replace('-', '_') }}"
+      threads: 4
+
+    # prod: the shared tables the team reads (schemas STAGING and MARTS).
+    prod:
+      type: snowflake
+      account: "{{ env_var('SNOWFLAKE_ACCOUNT') }}"
+      user: "{{ env_var('SNOWFLAKE_USER') }}"
+      password: "{{ env_var('SNOWFLAKE_PASSWORD') }}"
+      role: PROJECT_ROLE
+      warehouse: COMPUTE_WH
+      database: DATA226GROUPPROJECT
+      schema: MARTS
+      threads: 4
