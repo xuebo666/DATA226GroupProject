@@ -1,0 +1,5 @@
+category,pct_before_2000,pct_2000_2012_train,pct_2013_2015_test
+Books,13.1,86.9,0.0
+Music,3.3,63.5,33.2
+Video_DVD,0.3,48.1,51.6
+Digital_Ebook,0.0,39.1,60.9

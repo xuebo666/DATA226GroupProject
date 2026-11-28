@@ -1,0 +1,5 @@
+,Books,Music,Video_DVD,Digital_Ebook
+Books,100,56,61,67
+Music,56,100,60,46
+Video_DVD,61,60,100,54
+Digital_Ebook,67,46,54,100
